@@ -81,7 +81,7 @@ print("--------------------------------")
 print("Website: www.gugrocery.com")
 print("Phone: 202-660-3650")
 print("DATE: ", dateTimeObj.year, '/', dateTimeObj.month, '/', dateTimeObj.day)
-print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute, ':', dateTimeObj.second)
+print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute)
 print("--------------------------------")
 
 print("PRODUCT DETAILS")
