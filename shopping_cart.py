@@ -1,5 +1,7 @@
 # shopping_cart.py
 
+#f# shopping_cart.py
+
 #from pprint import pprint
 import operator
 import pandas
@@ -45,25 +47,27 @@ print("WELCOME TO THE GEORGETOWN GROCERY STORE")
 print("")
 
 # user INPUT of data
-prod_list = []
+selected_products = []
 # prod_list = [1, 8, 6, 16, 6] # temporary list of valid ids for testing purposes
 
 subtotal = 0
 
+print("Hello")
 
 while True:
     prod_id = input("Please input product identifier, or 'DONE' if there are no more items: ")
     if prod_id == "DONE":
-        print("Here are the products you chose: ", prod_list)
         break
     else:
         prod_id = int(prod_id)
-        matching_product = [p for p in products if p["id"] == prod_id]
-        prod_list.append(prod_id)
-        for prod in matching_product:
-            print("+ ", prod["name"], "(", to_usd(prod["price"]), ")")
-        price = prod["price"]
-        subtotal = subtotal + price
+        matching_products = [p for p in products if p["id"] == prod_id]
+        
+        try:
+            matching_product = matching_products[0]
+            print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
+            selected_products.append(matching_product)
+        except IndexError:
+            print("Product doesn't exist! Please select another product.")
 
 
 # Look-up products
@@ -84,12 +88,17 @@ print("DATE: ", dateTimeObj.year, '/', dateTimeObj.month, '/', dateTimeObj.day)
 print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute)
 print("--------------------------------")
 
-print("PRODUCT DETAILS")
+print("PRODUCT DETAILS:")
+
+for prod in selected_products:
+    print("+ ", prod["name"], "(", to_usd(prod["price"]), ")")
+    price = prod["price"]
+    subtotal = subtotal + price
 
 print("--------------------------------")
-tax = 0.1
 print("SUBTOTAL: $", round(subtotal, 2))
 
+tax = 0.1
 tax_amt = subtotal * tax
 print("TAX: $", round(tax_amt, 2))
 
