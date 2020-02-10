@@ -87,7 +87,7 @@ print("SUBTOTAL:", to_usd(subtotal))
 
 tax = 0.0875
 tax_amt = subtotal * tax
-print("TAX:", to_usd(tax_amt))
+print("TAX (8.75%):", to_usd(tax_amt))
 
 total_price = subtotal + tax_amt
 print("TOTAL PRICE:", to_usd(total_price))
