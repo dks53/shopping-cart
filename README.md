@@ -25,7 +25,7 @@ python shopping_cart.py
 
 ## Configuring Sales Tax Rates
 
-You'd like to share your code with stores in other locations as well, but different municipalities use different sales tax rates. You can now configure the tax via the ".env" file. 
+If you'd like to share your code with stores in other locations as well, but different municipalities use different sales tax rates, you can now configure the tax via the ".env" file. 
 
 Click on the .env file and set the tax to your state/munucipality's tax rate and save the file before running the program.
 
@@ -36,7 +36,5 @@ In addition to displaying a receipt at the end of the checkout process, the prog
 Once you run the code, navigate to the "receipts" directory inside the project repository and find the receipt for the code that you just ran. All receipts will remain in that folder.
 
 All receipts are saved in the following format:
-
-```sh
 receipts/year-month-day-hour-minute-second-microsecond.txt
-```
+
