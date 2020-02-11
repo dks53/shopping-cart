@@ -39,7 +39,6 @@ products = [
     {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
-
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 print("")
@@ -101,3 +100,78 @@ print("--------------------------------")
 print("Thank you for shopping with us!")
 print("We hope to see you again soon!")
 print("********************************")
+
+file_name = "receipts/" + str(dateTimeObj.year) + "-" + str(dateTimeObj.month) + "-" + str(dateTimeObj.day) + "-" + str(dateTimeObj.hour) + "-" + str(dateTimeObj.minute) + "-" + str(dateTimeObj.second) + "-" + str(dateTimeObj.microsecond) + ".txt"
+
+year = str(dateTimeObj.year)
+month = str(dateTimeObj.month)
+day = str(dateTimeObj.day)
+hour = str(dateTimeObj.hour)
+minute = str(dateTimeObj.minute)
+second = str(dateTimeObj.second)
+
+with open(file_name, 'w') as file: 
+    file.write("--------------------------------")
+    file.write("\n")
+    file.write("GEORGETOWN GROCERY STORE")
+    file.write("\n")
+    file.write("--------------------------------")
+    file.write("\n")
+
+    file.write("Website: www.gugrocery.com")
+    file.write("\n")
+    file.write("Phone: 202-660-3650")
+    file.write("\n")
+    file.write("DATE: ")
+    file.write(year)
+    file.write("/")
+    file.write(month)
+    file.write("/")
+    file.write(day)
+    file.write("\n")
+    file.write("TIME: ")
+    file.write(hour)
+    file.write(":")
+    file.write(minute)
+    file.write("\n")
+    file.write("--------------------------------")
+    file.write("\n")
+    file.write("PRODUCT DETAILS:")
+    file.write("\n")
+
+    for prod in selected_products:
+        file.write("+ ")
+        file.write(prod["name"])
+        file.write("(") 
+        file.write(to_usd(prod["price"]))
+        file.write(")")
+        file.write("\n")
+
+    file.write("--------------------------------")
+    file.write("\n")
+    file.write("SUBTOTAL: ")
+    file.write(to_usd(subtotal))
+    file.write("\n")
+
+    tax = os.getenv("state_tax")
+    tax = float(tax)
+    tax_amt = subtotal * tax
+    file.write("TAX (")
+    tax = (tax * 100)
+    tax = str(tax)
+    file.write(tax)
+    file.write("%): ")
+    file.write(to_usd(tax_amt))
+    file.write("\n")
+
+    total_price = subtotal + tax_amt
+    file.write("TOTAL PRICE: ")
+    file.write(to_usd(total_price))
+    file.write("\n")
+    file.write("--------------------------------")
+    file.write("\n")
+    file.write("Thank you for shopping with us!")
+    file.write("\n")
+    file.write("We hope to see you again soon!")
+    file.write("\n")
+    file.write("********************************")
