@@ -3,6 +3,10 @@
 import operator
 import pandas
 from datetime import datetime
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
@@ -35,6 +39,7 @@ products = [
     {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
+
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
 print("")
@@ -85,9 +90,10 @@ for prod in selected_products:
 print("--------------------------------")
 print("SUBTOTAL:", to_usd(subtotal))
 
-tax = 0.0875
+tax = os.getenv("state_tax")
+tax = float(tax)
 tax_amt = subtotal * tax
-print("TAX (8.75%):", to_usd(tax_amt))
+print("TAX (", tax * 100, "%): ", to_usd(tax_amt))
 
 total_price = subtotal + tax_amt
 print("TOTAL PRICE:", to_usd(total_price))
