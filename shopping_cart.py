@@ -47,6 +47,7 @@ print("")
 
 # user INPUT of data
 
+# list holds all the information of the products selected by the user (created using append)
 selected_products = []
 
 while True:
@@ -57,6 +58,7 @@ while True:
         prod_id = int(prod_id)
         matching_products = [p for p in products if p["id"] == prod_id]
         
+        # validation to check if product exists in the list of products
         try:
             matching_product = matching_products[0]
             print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
@@ -81,6 +83,7 @@ print("--------------------------------")
 
 print("PRODUCT DETAILS:")
 
+# loop to print products and prices on the receipt
 for prod in selected_products:
     print("+ ", prod["name"], "(", to_usd(prod["price"]), ")")
     price = prod["price"]
@@ -89,6 +92,7 @@ for prod in selected_products:
 print("--------------------------------")
 print("SUBTOTAL:", to_usd(subtotal))
 
+# use the tax amount from the .env file
 tax = os.getenv("state_tax")
 tax = float(tax)
 tax_amt = subtotal * tax
@@ -101,8 +105,10 @@ print("Thank you for shopping with us!")
 print("We hope to see you again soon!")
 print("********************************")
 
+# name of the .txt file in which the receipt is written/stored/printed
 file_name = "receipts/" + str(dateTimeObj.year) + "-" + str(dateTimeObj.month) + "-" + str(dateTimeObj.day) + "-" + str(dateTimeObj.hour) + "-" + str(dateTimeObj.minute) + "-" + str(dateTimeObj.second) + "-" + str(dateTimeObj.microsecond) + ".txt"
 
+# convert dateTimeObj to str so it can be printed on receipt
 year = str(dateTimeObj.year)
 month = str(dateTimeObj.month)
 day = str(dateTimeObj.day)
@@ -110,6 +116,7 @@ hour = str(dateTimeObj.hour)
 minute = str(dateTimeObj.minute)
 second = str(dateTimeObj.second)
 
+# opens a new .txt file and writes the receipt in it.
 with open(file_name, 'w') as file: 
     file.write("--------------------------------")
     file.write("\n")
