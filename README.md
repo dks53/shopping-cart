@@ -1,6 +1,6 @@
 # Darshil Shah - Shopping Cart Project
 
-This document walks you (the user) through this shopping cart project. It will help you setup your environment to run the code successfully. If you have any questions, you can reach out to dks53@georgetown.edu
+This document walks you (the user) through this shopping cart project. It will help you setup your environment to run the code successfully. If you have any questions, you can reach out to project lead dks53@georgetown.edu
 
 ## What does this code do?
 
