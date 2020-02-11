@@ -58,4 +58,3 @@ Once you run the code, navigate to the "receipts" directory inside the project r
 
 All receipts are saved in the following format:
 receipts/year-month-day-hour-minute-second-microsecond.txt
-
