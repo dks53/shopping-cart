@@ -20,8 +20,6 @@ def to_usd(my_price):
     """
 
 def find_product(one_prod_id, all_products):
-    print("Run find product function")
-
     matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
     matching_product = matching_products[0]
     return matching_product
@@ -63,14 +61,8 @@ while True:
         break
     else:
         selected_prod_ids.append(prod_id)
-
-print(selected_prod_ids)
-
-for prod_id in selected_prod_ids:
-    matching_product = find_product(prod_id, products)
-    print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
-
-print("COMPLETED!")
+        matching_product = find_product(prod_id, products)
+        print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
 
 # computer OUTPUT of results
 
@@ -90,9 +82,12 @@ print("--------------------------------")
 print("PRODUCT DETAILS:")
 
 # loop to print products and prices on the receipt
-for prod in selected_products:
-    print("+ ", prod["name"], "(", to_usd(prod["price"]), ")")
-    price = prod["price"]
+for prod_id in selected_prod_ids:
+
+    matching_product = find_product(prod_id, products)
+    print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
+    
+    price = matching_product["price"]
     subtotal = subtotal + price
 
 print("--------------------------------")
@@ -109,4 +104,3 @@ print("Thank you for shopping with us!")
 print("We hope to see you again soon!")
 print("********************************")
 print("")
-
