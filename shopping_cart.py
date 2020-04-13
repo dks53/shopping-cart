@@ -9,6 +9,10 @@ import csv
 
 load_dotenv()
 
+tax_rate = 0.0875 # constant, default value
+selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
+subtotal = 0 
+
 def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
     """
@@ -23,6 +27,14 @@ def find_product(one_prod_id, all_products):
     matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
     matching_product = matching_products[0]
     return matching_product
+
+def calculate_tax(pretax_subtotal):
+    tax_amt = pretax_subtotal * tax_rate
+    return tax_amt
+
+def calculate_total_price(pretax_subtotal,tax_charged):
+    total_price = pretax_subtotal + tax_charged
+    return total_price
 
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
@@ -49,8 +61,6 @@ products = [
 
 # user INPUT of data
 
-selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
-
 print("")
 print("WELCOME TO THE GEORGETOWN GROCERY STORE")
 print("")
@@ -67,7 +77,6 @@ while True:
 # computer OUTPUT of results
 
 dateTimeObj = datetime.now() # Returns a datetime object containing the local date and time
-subtotal = 0 
 
 print("--------------------------------")
 print("GEORGETOWN GROCERY STORE")
@@ -90,14 +99,13 @@ for prod_id in selected_prod_ids:
     price = matching_product["price"]
     subtotal = subtotal + price
 
+    tax_amt = calculate_tax(subtotal)
+        
+    total_price = calculate_total_price(subtotal,tax_amt)
+    
 print("--------------------------------")
 print("SUBTOTAL:", to_usd(subtotal))
-
-tax_rate = 0.0875 # constant, default value
-tax_amt = subtotal * tax_rate
 print("TAX (", tax_rate * 100, "%): ", to_usd(tax_amt))
-
-total_price = subtotal + tax_amt
 print("TOTAL PRICE:", to_usd(total_price))
 print("--------------------------------")
 print("Thank you for shopping with us!")
