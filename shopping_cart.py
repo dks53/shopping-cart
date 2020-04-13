@@ -19,6 +19,13 @@ def to_usd(my_price):
     Returns: $4,000.44
     """
 
+def find_product(one_prod_id, all_products):
+    print("Run find product function")
+
+    matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
+    matching_product = matching_products[0]
+    return matching_product
+
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -42,30 +49,28 @@ products = [
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 
+# user INPUT of data
+
+selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
+
 print("")
 print("WELCOME TO THE GEORGETOWN GROCERY STORE")
 print("")
-
-# user INPUT of data
-
-# list holds all the information of the products selected by the user (created using append)
-selected_products = []
 
 while True:
     prod_id = input("Please input product identifier, or 'DONE' if there are no more items: ")
     if prod_id == "DONE":
         break
     else:
-        prod_id = int(prod_id)
-        matching_products = [p for p in products if p["id"] == prod_id]
-        
-        # validation to check if product exists in the list of products
-        try:
-            matching_product = matching_products[0]
-            print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
-            selected_products.append(matching_product)
-        except IndexError:
-            print("Product doesn't exist! Please select another product.")
+        selected_prod_ids.append(prod_id)
+
+print(selected_prod_ids)
+
+for prod_id in selected_prod_ids:
+    matching_product = find_product(prod_id, products)
+    print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
+
+print("COMPLETED!")
 
 # computer OUTPUT of results
 
@@ -93,11 +98,9 @@ for prod in selected_products:
 print("--------------------------------")
 print("SUBTOTAL:", to_usd(subtotal))
 
-# use the tax amount from the .env file
-tax = os.getenv("state_tax")
-tax = float(tax)
-tax_amt = subtotal * tax
-print("TAX (", tax * 100, "%): ", to_usd(tax_amt))
+tax_rate = 0.0875 # constant, default value
+tax_amt = subtotal * tax_rate
+print("TAX (", tax_rate * 100, "%): ", to_usd(tax_amt))
 
 total_price = subtotal + tax_amt
 print("TOTAL PRICE:", to_usd(total_price))
@@ -105,81 +108,5 @@ print("--------------------------------")
 print("Thank you for shopping with us!")
 print("We hope to see you again soon!")
 print("********************************")
+print("")
 
-# name of the .txt file in which the receipt is written/stored/printed
-file_name = "receipts/" + str(dateTimeObj.year) + "-" + str(dateTimeObj.month) + "-" + str(dateTimeObj.day) + "-" + str(dateTimeObj.hour) + "-" + str(dateTimeObj.minute) + "-" + str(dateTimeObj.second) + "-" + str(dateTimeObj.microsecond) + ".txt"
-
-# convert dateTimeObj to str so it can be printed on receipt
-year = str(dateTimeObj.year)
-month = str(dateTimeObj.month)
-day = str(dateTimeObj.day)
-hour = str(dateTimeObj.hour)
-minute = str(dateTimeObj.minute)
-second = str(dateTimeObj.second)
-
-# opens a new .txt file and writes the receipt in it.
-with open(file_name, 'w') as file: 
-    file.write("--------------------------------")
-    file.write("\n")
-    file.write("GEORGETOWN GROCERY STORE")
-    file.write("\n")
-    file.write("--------------------------------")
-    file.write("\n")
-
-    file.write("Website: www.gugrocery.com")
-    file.write("\n")
-    file.write("Phone: 202-660-3650")
-    file.write("\n")
-    file.write("DATE: ")
-    file.write(year)
-    file.write("/")
-    file.write(month)
-    file.write("/")
-    file.write(day)
-    file.write("\n")
-    file.write("TIME: ")
-    file.write(hour)
-    file.write(":")
-    file.write(minute)
-    file.write("\n")
-    file.write("--------------------------------")
-    file.write("\n")
-    file.write("PRODUCT DETAILS:")
-    file.write("\n")
-
-    for prod in selected_products:
-        file.write("+ ")
-        file.write(prod["name"])
-        file.write("(") 
-        file.write(to_usd(prod["price"]))
-        file.write(")")
-        file.write("\n")
-
-    file.write("--------------------------------")
-    file.write("\n")
-    file.write("SUBTOTAL: ")
-    file.write(to_usd(subtotal))
-    file.write("\n")
-
-    tax = os.getenv("state_tax")
-    tax = float(tax)
-    tax_amt = subtotal * tax
-    file.write("TAX (")
-    tax = (tax * 100)
-    tax = str(tax)
-    file.write(tax)
-    file.write("%): ")
-    file.write(to_usd(tax_amt))
-    file.write("\n")
-
-    total_price = subtotal + tax_amt
-    file.write("TOTAL PRICE: ")
-    file.write(to_usd(total_price))
-    file.write("\n")
-    file.write("--------------------------------")
-    file.write("\n")
-    file.write("Thank you for shopping with us!")
-    file.write("\n")
-    file.write("We hope to see you again soon!")
-    file.write("\n")
-    file.write("********************************")
