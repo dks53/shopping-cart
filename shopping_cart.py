@@ -6,13 +6,14 @@ from datetime import datetime
 import os
 from dotenv import load_dotenv
 import csv
-
 load_dotenv()
 
+# defining variables used
 tax_rate = 0.0875 # constant, default value
 selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
-subtotal = 0 
+subtotal = 0 # ensures that the subtotal calculation begins at 0 for each customer.
 
+# defining functions
 def to_usd(my_price):
     return f"${my_price:,.2f}" #> $12,000.71
     """
@@ -27,15 +28,39 @@ def find_product(one_prod_id, all_products):
     matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
     matching_product = matching_products[0]
     return matching_product
+    """
+    Checks if the product requested by the customer exists in the database (products list)
+    Param 1: "one_prod_id" which holds the unique product identifier that is entered by the user
+    Param 2: "all_products" which holds the entire list of products
+    Returns: "matching_product" with all the key/value paris corresponding to the selected product ID
+    Example: matching_product = {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50}
+    """
 
 def calculate_tax(pretax_subtotal):
     tax_amt = pretax_subtotal * tax_rate
     return tax_amt
+    """
+    Calculated the amount of tax to be paid on a particular purchase/transaction
+    Param: pretax_subtotal (float) like 68.52
+    Example: calculate_tax(68.52)
+    Returns: 5.9955
+    """
 
 def calculate_total_price(pretax_subtotal,tax_charged):
     total_price = pretax_subtotal + tax_charged
     return total_price
+    """
+    Calculated the total price to be paid on a particular purchase/transaction
+    Param 1: pretax_subtotal (float) like 68.52
+    Param 2: tax_charged (float) like 5.9955
+    Example: calculate_tax(68.52,5.9955)
+    Returns: 74.5155
+    """
 
+# TODO: define a function to refactor timestamp-formatting logic
+
+
+# Product dictionary based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 products = [
     {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
     {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
@@ -57,9 +82,9 @@ products = [
     {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
     {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
-] # based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
+] 
 
-# user INPUT of data
+## user INPUT of data
 
 print("")
 print("WELCOME TO THE GEORGETOWN GROCERY STORE")
