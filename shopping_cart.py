@@ -47,11 +47,19 @@ def calculate_total_price(pretax_subtotal,tax_charged):
     Calculated the total price to be paid on a particular purchase/transaction
     Param 1: pretax_subtotal (float) like 68.52
     Param 2: tax_charged (float) like 5.9955
-    Example: calculate_tax(68.52,5.9955)
+    Example: calculate_total_price(68.52,5.9955)
     Returns: 74.5155
     """
 
-# TODO: define a function to refactor timestamp-formatting logic
+def timestamp(current_datetime):
+    datetime_str = current_datetime.strftime("%Y-%m-%d %H:%M:%S")
+    return f"Date/Time: {datetime_str}"
+    """
+    Formats and returns the current date/time
+    Param: current_datetime takes information from the datetime module
+    Example: timestamp(datetime().now)
+    Returns: 2020-04-16 11:15:35
+    """
 
 # Remaining code that requires user input in order to run successfully.
 '''
@@ -108,8 +116,7 @@ if __name__ == "__main__":
     print("--------------------------------")
     print("Website: www.gugrocery.com")
     print("Phone: 202-660-3650")
-    print("DATE: ", dateTimeObj.year, '/', dateTimeObj.month, '/', dateTimeObj.day)
-    print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute)
+    print(timestamp(datetime.now()))
     print("--------------------------------")
     print("PRODUCT DETAILS:")
 

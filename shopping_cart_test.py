@@ -1,9 +1,10 @@
 # shopping_cart_test.py
 
 import pytest
+from datetime import datetime
 
 # import functions and variables that are required, from shopping_cart.py
-from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
+from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price, timestamp
 
 # test tax_rate
 def test_tax_rate(): 
@@ -60,9 +61,11 @@ def test_find_product():
     assert matching_product["name"] == "Gluten Free Quinoa Three Cheese & Mushroom Blend"
     assert matching_product["price"] == 3.99
 
-    # TODO: What to do if it doesn't match?
-    # HAVE REMOVED PRODUCT NUMBER 3 FROM THE LIST TO TEST THE ERROR.
-    # IndexError?
+    # test to raise an IndexError if the user inputs a product ID that doesn't exist.
+    with pytest.raises(IndexError):
+        find_product("3", products)
+    with pytest.raises(IndexError):
+        find_product("245", products)
 
     '''
     Tests the product finding and matching function. Ensures that the product ID selected by the customer matches an existing product
@@ -85,9 +88,17 @@ def test_calculate_tax():
 def test_calculate_total_price():
     result = calculate_total_price(100,10)
     assert result == 110
-
     '''
     Tests the calculate_total_price function by adding the pretax_subtotal and tax_amt
     Example: pretax_subtotal = 100 and tax_amt = 10
     Result: total_price = 100 + 10 = 110
+    '''
+
+def test_timestamp():
+    datetime_example = datetime(2020, 4, 16, 18, 22, 36)
+    assert timestamp(datetime_example) == "Date/Time: 2020-04-16 18:22:36"
+    '''
+    Tests the timestamp function by checking if a easily understandable date format is printed.
+    Example: datetime(2020, 4, 16, 18, 22, 36)
+    Result: 2020-04-16 18:22:36
     '''
