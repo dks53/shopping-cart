@@ -9,7 +9,7 @@ import csv
 load_dotenv()
 
 # defining variables used
-tax_rate = 0.0875 # constant, default value
+tax_rate = 0.1 # constant, default value
 selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
 subtotal = 0 # ensures that the subtotal calculation begins at 0 for each customer.
 
@@ -24,18 +24,18 @@ def to_usd(my_price):
     Returns: $4,000.44
     """
 
-#def find_product(one_prod_id, all_products):
-#    matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
-#    matching_product = matching_products[0]
-#    return matching_product
-#    """
-#    Checks if the product requested by the customer exists in the database (products list)
-#    Param 1: "one_prod_id" which holds the unique product identifier that is entered by the user
-#    Param 2: "all_products" which holds the entire list of products
-#    Returns: "matching_product" with all the key/value paris corresponding to the selected product ID
-#    Example: matching_product = {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50}
-#    """
-#
+def find_product(one_prod_id, all_products):
+    matching_products = [p for p in all_products if str(p["id"]) == one_prod_id]
+    matching_product = matching_products[0]
+    return matching_product
+    """
+    Checks if the product requested by the customer exists in the database (products list)
+    Param 1: "one_prod_id" which holds the unique product identifier that is entered by the user
+    Param 2: "all_products" which holds the entire list of products
+    Returns: "matching_product" with all the key/value paris corresponding to the selected product ID
+    Example: matching_product = {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50}
+    """
+
 #def calculate_tax(pretax_subtotal):
 #    tax_amt = pretax_subtotal * tax_rate
 #    return tax_amt
