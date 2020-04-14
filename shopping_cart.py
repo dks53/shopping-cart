@@ -36,30 +36,30 @@ def find_product(one_prod_id, all_products):
     Example: matching_product = {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50}
     """
 
-#def calculate_tax(pretax_subtotal):
-#    tax_amt = pretax_subtotal * tax_rate
-#    return tax_amt
-#    """
-#    Calculated the amount of tax to be paid on a particular purchase/transaction
-#    Param: pretax_subtotal (float) like 68.52
-#    Example: calculate_tax(68.52)
-#    Returns: 5.9955
-#    """
-#
-#def calculate_total_price(pretax_subtotal,tax_charged):
-#    total_price = pretax_subtotal + tax_charged
-#    return total_price
-#    """
-#    Calculated the total price to be paid on a particular purchase/transaction
-#    Param 1: pretax_subtotal (float) like 68.52
-#    Param 2: tax_charged (float) like 5.9955
-#    Example: calculate_tax(68.52,5.9955)
-#    Returns: 74.5155
-#    """
-#
-## TODO: define a function to refactor timestamp-formatting logic
-#
-#
+def calculate_tax(pretax_subtotal):
+    tax_amt = pretax_subtotal * tax_rate
+    return tax_amt
+    """
+    Calculated the amount of tax to be paid on a particular purchase/transaction
+    Param: pretax_subtotal (float) like 68.52
+    Example: calculate_tax(68.52)
+    Returns: 5.9955
+    """
+
+def calculate_total_price(pretax_subtotal,tax_charged):
+    total_price = pretax_subtotal + tax_charged
+    return total_price
+    """
+    Calculated the total price to be paid on a particular purchase/transaction
+    Param 1: pretax_subtotal (float) like 68.52
+    Param 2: tax_charged (float) like 5.9955
+    Example: calculate_tax(68.52,5.9955)
+    Returns: 74.5155
+    """
+
+# TODO: define a function to refactor timestamp-formatting logic
+
+
 ## Product dictionary based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
 #products = [
 #    {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},

@@ -3,7 +3,7 @@
 import pytest
 
 #from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
-from shopping_cart import tax_rate, to_usd, find_product
+from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
 
 # test tax_rate
 def test_tax_rate(): 
@@ -71,5 +71,23 @@ def test_find_product():
     '''
 
 # test calculate_tax
+def test_calculate_tax():
+    result = calculate_tax(120.38)
+    assert result == 12.038
+
+    '''
+    Tests the calculate_tax function by calculating 10% of the given pretax_subtotal (i.e.: pretax_subtotal * 0.1)
+    Example: pretax_subtotal = 120.38
+    Result: tax_amt = 10% of 120.38 = 12.038
+    '''
 
 # test calculate_total_price
+def test_calculate_total_price():
+    result = calculate_total_price(100,10)
+    assert result == 110
+
+    '''
+    Tests the calculate_total_price function by adding the pretax_subtotal and tax_amt
+    Example: pretax_subtotal = 100 and tax_amt = 10
+    Result: total_price = 100 + 10 = 110
+    '''
