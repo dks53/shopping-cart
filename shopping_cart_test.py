@@ -5,15 +5,24 @@ import pytest
 #from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
 from shopping_cart import tax_rate, to_usd, find_product
 
-## TODO:
-
-def test_tax_rate(): # checking the tax rate is set to the default value of 10% 
+# test tax_rate
+def test_tax_rate(): 
     assert(tax_rate) == 0.1
+    
+    '''
+    Imports the tax_rate set in the shopping_cart.py file and checks to see if it matches.
+    If the tax_rate is changed in the shopping_cart.py file, it must be changed in this test_tax_rate function too.
+    The tax rate by default is set to 10% (0.1)
+    '''
 
 # test to_usd
-def test_to_usd(): # formatting the number to display the $ sign, round to and display 2 decimals and insert thousands separator.
+def test_to_usd():
     result = to_usd(13673.239020)
     assert result == "$13,673.24"
+    
+    '''
+    Tests the to_usd function for formatting - displays the $ sign, rounds to and displays 2 decimals and inserts thousands separator.
+    '''
 
 # test find_product
 def test_find_product():
@@ -38,7 +47,6 @@ def test_find_product():
     {"id":6, "name": "Dry Nose Oil", "department": "personal care", "aisle": "cold flu allergy", "price": 21.99},
     {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
 ] 
-    
     # test to see if the product matches 
     matching_product = find_product("1", products)
     assert matching_product["name"] == "Chocolate Sandwich Cookies"
@@ -55,6 +63,12 @@ def test_find_product():
     # TODO: What to do if it doesn't match?
     # HAVE REMOVED PRODUCT NUMBER 3 FROM THE LIST TO TEST THE ERROR.
     # IndexError?
+
+    '''
+    Tests the product finding and matching function. Ensures that the product ID selected by the customer matches an existing product
+    in the database/list. If the product exists, it will pass and allow the user to continue. If the product doesn't exist it will 
+    display an error.
+    '''
 
 # test calculate_tax
 
