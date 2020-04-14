@@ -2,7 +2,7 @@
 
 import pytest
 
-#from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
+# import functions and variables that are required, from shopping_cart.py
 from shopping_cart import tax_rate, to_usd, find_product, calculate_tax, calculate_total_price
 
 # test tax_rate

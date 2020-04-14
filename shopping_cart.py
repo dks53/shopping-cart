@@ -1,12 +1,6 @@
 # shopping_cart.py
 
-import operator
-import pandas
 from datetime import datetime
-import os
-from dotenv import load_dotenv
-import csv
-load_dotenv()
 
 # defining variables used in various parts of the code
 tax_rate = 0.1 # constant, default value
@@ -59,6 +53,12 @@ def calculate_total_price(pretax_subtotal,tax_charged):
 
 # TODO: define a function to refactor timestamp-formatting logic
 
+# Remaining code that requires user input in order to run successfully.
+'''
+In this program, the user will be able to input prodcut identifiers (1-20) to determine which products they wish to purchase.
+Once the products are selected and the user is DONE, a receipt will be printed with the subtotal, tax payable and total amounts.
+Other information like store details, date/time of purchase and greetings will also be printed on the receipt.
+'''
 if __name__ == "__main__":
 
     # Product dictionary based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
