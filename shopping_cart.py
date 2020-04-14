@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 import csv
 load_dotenv()
 
-# defining variables used
+# defining variables used in various parts of the code
 tax_rate = 0.1 # constant, default value
 selected_prod_ids = [] # list holds all the product IDs entered by the user (created using append)
 subtotal = 0 # ensures that the subtotal calculation begins at 0 for each customer.
@@ -59,80 +59,83 @@ def calculate_total_price(pretax_subtotal,tax_charged):
 
 # TODO: define a function to refactor timestamp-formatting logic
 
-# Product dictionary based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
-products = [
-    {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
-    {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
-    {"id":3, "name": "Robust Golden Unsweetened Oolong Tea", "department": "beverages", "aisle": "tea", "price": 2.49},
-    {"id":4, "name": "Smart Ones Classic Favorites Mini Rigatoni With Vodka Cream Sauce", "department": "frozen", "aisle": "frozen meals", "price": 6.99},
-    {"id":5, "name": "Green Chile Anytime Sauce", "department": "pantry", "aisle": "marinades meat preparation", "price": 7.99},
-    {"id":6, "name": "Dry Nose Oil", "department": "personal care", "aisle": "cold flu allergy", "price": 21.99},
-    {"id":7, "name": "Pure Coconut Water With Orange", "department": "beverages", "aisle": "juice nectars", "price": 3.50},
-    {"id":8, "name": "Cut Russet Potatoes Steam N' Mash", "department": "frozen", "aisle": "frozen produce", "price": 4.25},
-    {"id":9, "name": "Light Strawberry Blueberry Yogurt", "department": "dairy eggs", "aisle": "yogurt", "price": 6.50},
-    {"id":10, "name": "Sparkling Orange Juice & Prickly Pear Beverage", "department": "beverages", "aisle": "water seltzer sparkling water", "price": 2.99},
-    {"id":11, "name": "Peach Mango Juice", "department": "beverages", "aisle": "refrigerated", "price": 1.99},
-    {"id":12, "name": "Chocolate Fudge Layer Cake", "department": "frozen", "aisle": "frozen dessert", "price": 18.50},
-    {"id":13, "name": "Saline Nasal Mist", "department": "personal care", "aisle": "cold flu allergy", "price": 16.00},
-    {"id":14, "name": "Fresh Scent Dishwasher Cleaner", "department": "household", "aisle": "dish detergents", "price": 4.99},
-    {"id":15, "name": "Overnight Diapers Size 6", "department": "babies", "aisle": "diapers wipes", "price": 25.50},
-    {"id":16, "name": "Mint Chocolate Flavored Syrup", "department": "snacks", "aisle": "ice cream toppings", "price": 4.50},
-    {"id":17, "name": "Rendered Duck Fat", "department": "meat seafood", "aisle": "poultry counter", "price": 9.99},
-    {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
-    {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
-    {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
-] 
+if __name__ == "__main__":
 
-## user INPUT of data
+    # Product dictionary based on data from Instacart: https://www.instacart.com/datasets/grocery-shopping-2017
+    products = [
+        {"id":1, "name": "Chocolate Sandwich Cookies", "department": "snacks", "aisle": "cookies cakes", "price": 3.50},
+        {"id":2, "name": "All-Seasons Salt", "department": "pantry", "aisle": "spices seasonings", "price": 4.99},
+        {"id":3, "name": "Robust Golden Unsweetened Oolong Tea", "department": "beverages", "aisle": "tea", "price": 2.49},
+        {"id":4, "name": "Smart Ones Classic Favorites Mini Rigatoni With Vodka Cream Sauce", "department": "frozen", "aisle": "frozen meals", "price": 6.99},
+        {"id":5, "name": "Green Chile Anytime Sauce", "department": "pantry", "aisle": "marinades meat preparation", "price": 7.99},
+        {"id":6, "name": "Dry Nose Oil", "department": "personal care", "aisle": "cold flu allergy", "price": 21.99},
+        {"id":7, "name": "Pure Coconut Water With Orange", "department": "beverages", "aisle": "juice nectars", "price": 3.50},
+        {"id":8, "name": "Cut Russet Potatoes Steam N' Mash", "department": "frozen", "aisle": "frozen produce", "price": 4.25},
+        {"id":9, "name": "Light Strawberry Blueberry Yogurt", "department": "dairy eggs", "aisle": "yogurt", "price": 6.50},
+        {"id":10, "name": "Sparkling Orange Juice & Prickly Pear Beverage", "department": "beverages", "aisle": "water seltzer sparkling water", "price": 2.99},
+        {"id":11, "name": "Peach Mango Juice", "department": "beverages", "aisle": "refrigerated", "price": 1.99},
+        {"id":12, "name": "Chocolate Fudge Layer Cake", "department": "frozen", "aisle": "frozen dessert", "price": 18.50},
+        {"id":13, "name": "Saline Nasal Mist", "department": "personal care", "aisle": "cold flu allergy", "price": 16.00},
+        {"id":14, "name": "Fresh Scent Dishwasher Cleaner", "department": "household", "aisle": "dish detergents", "price": 4.99},
+        {"id":15, "name": "Overnight Diapers Size 6", "department": "babies", "aisle": "diapers wipes", "price": 25.50},
+        {"id":16, "name": "Mint Chocolate Flavored Syrup", "department": "snacks", "aisle": "ice cream toppings", "price": 4.50},
+        {"id":17, "name": "Rendered Duck Fat", "department": "meat seafood", "aisle": "poultry counter", "price": 9.99},
+        {"id":18, "name": "Pizza for One Suprema Frozen Pizza", "department": "frozen", "aisle": "frozen pizza", "price": 12.50},
+        {"id":19, "name": "Gluten Free Quinoa Three Cheese & Mushroom Blend", "department": "dry goods pasta", "aisle": "grains rice dried goods", "price": 3.99},
+        {"id":20, "name": "Pomegranate Cranberry & Aloe Vera Enrich Drink", "department": "beverages", "aisle": "juice nectars", "price": 4.25}
+    ] 
 
-print("")
-print("WELCOME TO THE GEORGETOWN GROCERY STORE")
-print("")
+    ## USER INPUT of data
+    print("")
+    print("WELCOME TO THE GEORGETOWN GROCERY STORE")
+    print("")
 
-while True:
-    prod_id = input("Please input product identifier, or 'DONE' if there are no more items: ")
-    if prod_id == "DONE":
-        break
-    else:
-        selected_prod_ids.append(prod_id)
+    while True:
+        prod_id = input("Please input product identifier, or 'DONE' if there are no more items: ")
+        if prod_id == "DONE":
+            break
+        else:
+            selected_prod_ids.append(prod_id)
+            matching_product = find_product(prod_id, products)
+            print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
+
+    # OUTPUT of results based on user input
+
+    dateTimeObj = datetime.now() # Returns a datetime object containing the local date and time
+
+    print("--------------------------------")
+    print("GEORGETOWN GROCERY STORE")
+    print("--------------------------------")
+    print("Website: www.gugrocery.com")
+    print("Phone: 202-660-3650")
+    print("DATE: ", dateTimeObj.year, '/', dateTimeObj.month, '/', dateTimeObj.day)
+    print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute)
+    print("--------------------------------")
+    print("PRODUCT DETAILS:")
+
+    # loop to print products and prices on the receipt
+    for prod_id in selected_prod_ids:
+
+        # invokes the find_product function to return that specific product's information
         matching_product = find_product(prod_id, products)
         print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
 
-# computer OUTPUT of results
+        # calculate subtotal of the entire purchase before tax
+        price = matching_product["price"]
+        subtotal = subtotal + price
 
-dateTimeObj = datetime.now() # Returns a datetime object containing the local date and time
+        # invokes the calculate_tax function to calculate the amount to be taxed
+        tax_amt = calculate_tax(subtotal)
 
-print("--------------------------------")
-print("GEORGETOWN GROCERY STORE")
-print("--------------------------------")
+        # invokes the calculate_total_price function to calculate the final price that the customer must pay
+        total_price = calculate_total_price(subtotal,tax_amt)
 
-print("Website: www.gugrocery.com")
-print("Phone: 202-660-3650")
-print("DATE: ", dateTimeObj.year, '/', dateTimeObj.month, '/', dateTimeObj.day)
-print("TIME: ", dateTimeObj.hour, ':', dateTimeObj.minute)
-print("--------------------------------")
-
-print("PRODUCT DETAILS:")
-
-# loop to print products and prices on the receipt
-for prod_id in selected_prod_ids:
-
-    matching_product = find_product(prod_id, products)
-    print("+ ", matching_product["name"], "(", to_usd(matching_product["price"]), ")")
-    
-    price = matching_product["price"]
-    subtotal = subtotal + price
-
-    tax_amt = calculate_tax(subtotal)
-        
-    total_price = calculate_total_price(subtotal,tax_amt)
-    
-print("--------------------------------")
-print("SUBTOTAL:", to_usd(subtotal))
-print("TAX (", tax_rate * 100, "%): ", to_usd(tax_amt))
-print("TOTAL PRICE:", to_usd(total_price))
-print("--------------------------------")
-print("Thank you for shopping with us!")
-print("We hope to see you again soon!")
-print("********************************")
-print("")
+    print("--------------------------------")
+    print("SUBTOTAL:", to_usd(subtotal))
+    print("TAX (", tax_rate * 100, "%): ", to_usd(tax_amt))
+    print("TOTAL PRICE:", to_usd(total_price))
+    print("--------------------------------")
+    print("Thank you for shopping with us!")
+    print("We hope to see you again soon!")
+    print("********************************")
+    print("")
